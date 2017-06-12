@@ -11,3 +11,17 @@ $(document).ready(function() {
     alert(error);
   });
 });
+
+function updateIconColor(e) {
+  var target = e.target;
+  if ( target.classList.contains('active') ){
+    target.classList.remove('active');
+    target.blur();
+  }
+
+  else{
+    target.classList.add('active');
+    target.blur();
+  }
+
+}

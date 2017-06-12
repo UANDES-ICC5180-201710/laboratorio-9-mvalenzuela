@@ -1,11 +1,12 @@
-class CoursesController < ApplicationController
+  class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
   # GET /courses.json
   def index
     @courses = Course.all
-
+    @courses_of_interest = current_person.interest_courses
+    puts (@courses_of_interest)
     if params[:title]
       @courses = @courses.where("lower(title) like ?", "%#{params[:title]}%")
     end
@@ -64,6 +65,10 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+ def ajaxFunction
+   puts("holo")
+ end
 
   private
     # Use callbacks to share common setup or constraints between actions.

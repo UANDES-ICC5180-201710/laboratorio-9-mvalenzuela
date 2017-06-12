@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
     end
     resources :people
+    resources :people_interests
 
     root to: 'courses#index'
   end

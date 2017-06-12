@@ -12,6 +12,8 @@
  *
  */
 
+
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "*";
@@ -20,5 +22,6 @@ table > thead {
   th {
     background: $brand-primary;
     color: white;
+
   }
 }

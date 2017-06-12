@@ -8,7 +8,7 @@
       <th>Title</th>
       <th>Code</th>
       <th>Teacher</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -18,6 +18,8 @@
         <td class="td" id="td"><%= course.title %></td>
         <td><%= course.code %></td>
         <td><%= course.teacher %></td>
+
+        <td><button type="button" onclick="updateIconColor(event)" class="btn btn-link glyphicon glyphicon-heart gray"></td>
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
