@@ -14,6 +14,7 @@ $(document).ready(function() {
 
 function updateIconColor(e) {
   var target = e.target;
+  var value = target.value;
   if ( target.classList.contains('active') ){
     target.classList.remove('active');
     target.blur();
@@ -23,5 +24,18 @@ function updateIconColor(e) {
     target.classList.add('active');
     target.blur();
   }
+  var result
+  $.ajax({
+          type: "POST",
+          url: "courses/ajaxFunction",
+          data: {
+          "course_id" : value
+          },
+          datatype: 'json',
+          success: function(json){
+            result = json
+            target.innerHTML = result;
+          }
+      })
 
 }

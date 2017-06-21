@@ -25,7 +25,6 @@ class PeopleInterestsController < ApplicationController
   # POST /people_interests.json
   def create
     @people_interest = PeopleInterest.new(people_interest_params)
-
     respond_to do |format|
       if @people_interest.save
         format.html { redirect_to @people_interest, notice: 'People interest was successfully created.' }
@@ -58,6 +57,25 @@ class PeopleInterestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to people_interests_url, notice: 'People interest was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def ajaxFunction
+    valor = params['course_id']
+    if PeopleInterest.exists?(person_id: current_person.id, interest_course: valor)
+      PeopleInterest.where(person_id: current_person.id, interest_course: valor).destroy_all
+    else
+      @person_interest = PeopleInterest.new
+      @person_interest.person = current_person
+      @person_interest.interest_course = Course.find(valor)
+      @person_interest.save
+    end
+    course = Course.find(valor)
+    likes = course.people.count
+    rez = {"likes" => likes}
+    respond_to do |format|
+      format.html
+      format.json { render json: rez }  # respond with the created JSON object
     end
   end
 

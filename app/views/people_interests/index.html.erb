@@ -15,7 +15,7 @@
     <% @people_interests.each do |people_interest| %>
       <tr>
         <td><%= people_interest.person %></td>
-        <td><%= people_interest.course %></td>
+        <td><%= people_interest.interest_course %></td>
         <td><%= link_to 'Show', people_interest %></td>
         <td><%= link_to 'Edit', edit_people_interest_path(people_interest) %></td>
         <td><%= link_to 'Destroy', people_interest, method: :delete, data: { confirm: 'Are you sure?' } %></td>

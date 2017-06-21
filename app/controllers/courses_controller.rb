@@ -5,8 +5,10 @@
   # GET /courses.json
   def index
     @courses = Course.all
+    #@courses.each do |course|
+      #course.likes =
+    #end
     @courses_of_interest = current_person.interest_courses
-    puts (@courses_of_interest)
     if params[:title]
       @courses = @courses.where("lower(title) like ?", "%#{params[:title]}%")
     end
@@ -15,6 +17,7 @@
   # GET /courses/1
   # GET /courses/1.json
   def show
+    puts(@course.people)
   end
 
   # GET /courses/new
@@ -67,7 +70,21 @@
   end
 
  def ajaxFunction
-   puts("holo")
+   valor = params['course_id']
+   if PeopleInterest.exists?(person_id: current_person.id, interest_course: valor)
+     PeopleInterest.where(person_id: current_person.id, interest_course: valor).destroy_all
+   else
+     @person_interest = PeopleInterest.new
+     @person_interest.person = current_person
+     @person_interest.interest_course = Course.find(valor)
+     @person_interest.save
+   end
+   course = Course.find(valor)
+   likes = course.people.count
+   rez = {"likes" => likes}
+   respond_to do |format|
+     format.json { render json: likes }  # respond with the created JSON object
+   end
  end
 
   private

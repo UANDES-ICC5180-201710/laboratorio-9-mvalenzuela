@@ -8,7 +8,7 @@
       <th>Title</th>
       <th>Code</th>
       <th>Teacher</th>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -18,8 +18,11 @@
         <td class="td" id="td"><%= course.title %></td>
         <td><%= course.code %></td>
         <td><%= course.teacher %></td>
-
-        <td><button type="button" onclick="updateIconColor(event)" class="btn btn-link glyphicon glyphicon-heart gray"></td>
+        <% if @courses_of_interest.include? course %>
+        <td><button type="button" onclick="updateIconColor(event)" value="<%=course.id%>" class="btn btn-link glyphicon glyphicon-heart active"><%=course.people.count%></td>
+        <% else %>
+        <td><button type="button" onclick="updateIconColor(event)" value="<%=course.id%>" class="btn btn-link glyphicon glyphicon-heart gray"><%=course.people.count%></td>
+        <% end %>
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
